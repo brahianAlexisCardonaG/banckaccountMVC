@@ -1,12 +1,12 @@
 package com.MVC.bankaccount.application.mapper.account;
 
-import com.MVC.bankaccount.infraestructure.controller.account.request.AccountClientRequest;
-import com.MVC.bankaccount.infraestructure.controller.account.response.AccountClientTransactionResponse;
-import com.MVC.bankaccount.infraestructure.controller.client.request.ClientRequest;
-import com.MVC.bankaccount.infraestructure.controller.transaction.response.TransactionResponse;
-import com.MVC.bankaccount.infraestructure.entities.AccountEntity;
-import com.MVC.bankaccount.infraestructure.entities.ClientEntity;
-import com.MVC.bankaccount.infraestructure.entities.TransactionEntity;
+import com.MVC.bankaccount.infrastructure.controller.account.request.AccountClientRequest;
+import com.MVC.bankaccount.infrastructure.controller.account.response.AccountClientTransactionResponse;
+import com.MVC.bankaccount.infrastructure.controller.client.request.ClientRequest;
+import com.MVC.bankaccount.infrastructure.controller.transaction.response.TransactionResponse;
+import com.MVC.bankaccount.infrastructure.entities.AccountEntity;
+import com.MVC.bankaccount.infrastructure.entities.ClientEntity;
+import com.MVC.bankaccount.infrastructure.entities.TransactionEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

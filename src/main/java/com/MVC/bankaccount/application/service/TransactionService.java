@@ -1,7 +1,7 @@
 package com.MVC.bankaccount.application.service;
 
 import com.MVC.bankaccount.application.usecase.TransactionCreateCaseImpl;
-import com.MVC.bankaccount.infraestructure.controller.transaction.request.TransactionRequest;
+import com.MVC.bankaccount.infrastructure.controller.transaction.request.TransactionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

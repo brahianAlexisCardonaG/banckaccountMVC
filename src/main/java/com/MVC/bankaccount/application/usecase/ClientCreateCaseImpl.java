@@ -1,13 +1,11 @@
 package com.MVC.bankaccount.application.usecase;
 
 import com.MVC.bankaccount.application.mapper.client.ClientMapper;
-import com.MVC.bankaccount.infraestructure.controller.client.request.ClientRequest;
-import com.MVC.bankaccount.infraestructure.entities.ClientEntity;
-import com.MVC.bankaccount.infraestructure.repository.JpaClientRepository;
+import com.MVC.bankaccount.infrastructure.controller.client.request.ClientRequest;
+import com.MVC.bankaccount.infrastructure.entities.ClientEntity;
+import com.MVC.bankaccount.infrastructure.repository.JpaClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class ClientCreateCaseImpl {
