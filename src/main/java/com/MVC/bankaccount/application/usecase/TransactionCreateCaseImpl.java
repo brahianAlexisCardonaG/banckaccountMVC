@@ -1,5 +1,6 @@
 package com.MVC.bankaccount.application.usecase;
 
+import com.MVC.bankaccount.application.mapper.transaction.TransactionMapper;
 import com.MVC.bankaccount.application.service.MessageService;
 import com.MVC.bankaccount.domain.exception.GeneralNotFoundException;
 import com.MVC.bankaccount.infraestructure.controller.transaction.request.TransactionRequest;
@@ -9,7 +10,6 @@ import com.MVC.bankaccount.infraestructure.entities.TransactionEntity;
 import com.MVC.bankaccount.infraestructure.repository.JpaAccountRepository;
 import com.MVC.bankaccount.infraestructure.repository.JpaClientRepository;
 import com.MVC.bankaccount.infraestructure.repository.JpaTransactionRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,17 +25,17 @@ public class TransactionCreateCaseImpl {
 
     private final JpaAccountRepository jpaAccountRepository;
 
-    private final AccountGetCaseImpl accountGetCase;
-
     private final MessageService messageService;
 
+    private final TransactionMapper transactionMapper;
+
     @Autowired
-    public TransactionCreateCaseImpl(JpaTransactionRepository jpaTransactionRepository, JpaClientRepository jpaClientRepository, JpaAccountRepository jpaAccountRepository, AccountGetCaseImpl accountGetCase, MessageService messageService) {
+    public TransactionCreateCaseImpl(JpaTransactionRepository jpaTransactionRepository, JpaClientRepository jpaClientRepository, JpaAccountRepository jpaAccountRepository, MessageService messageService) {
         this.jpaTransactionRepository = jpaTransactionRepository;
         this.jpaClientRepository = jpaClientRepository;
         this.jpaAccountRepository = jpaAccountRepository;
-        this.accountGetCase = accountGetCase;
         this.messageService = messageService;
+        this.transactionMapper = TransactionMapper.INSTANCE;
     }
 
     public TransactionEntity createTransaction(TransactionRequest transaction, String identificationNumber, String accountNumber) {
@@ -45,23 +45,22 @@ public class TransactionCreateCaseImpl {
 
         if (existingAccount.isEmpty() || existingClient.isEmpty()) {
             throw new GeneralNotFoundException(messageService.getMessage("error.account.code.client.code.not.exist"));
-        } else {
-
-            AccountEntity account = existingAccount.get(0);
-
-            if (transaction.getAmount().compareTo(account.getBalance()) > 0) {
-                throw new GeneralNotFoundException(messageService.getMessage("error.account.insufficient.balance"));
-            }
-
-            TransactionEntity transactionEntity = new TransactionEntity();
-            BeanUtils.copyProperties(transaction, transactionEntity);
-            transactionEntity.setAccount(account);
-
-            account.setBalance(account.getBalance().subtract(transaction.getAmount()));
-
-            jpaAccountRepository.save(account);
-
-            return jpaTransactionRepository.save(transactionEntity);
         }
+
+        AccountEntity account = existingAccount.get(0);
+
+        if (transaction.getAmount().compareTo(account.getBalance()) > 0) {
+            throw new GeneralNotFoundException(messageService.getMessage("error.account.insufficient.balance"));
+        }
+
+        // Convertir TransactionRequest a TransactionEntity usando el mapper
+        TransactionEntity transactionEntity = transactionMapper.toEntity(transaction);
+        transactionEntity.setAccount(account);
+
+        // Actualizar saldo de la cuenta
+        account.setBalance(account.getBalance().subtract(transaction.getAmount()));
+        jpaAccountRepository.save(account);
+
+        return jpaTransactionRepository.save(transactionEntity);
     }
 }

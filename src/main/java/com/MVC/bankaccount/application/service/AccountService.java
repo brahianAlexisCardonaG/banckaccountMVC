@@ -1,5 +1,6 @@
 package com.MVC.bankaccount.application.service;
 
+import com.MVC.bankaccount.application.mapper.account.AccountMapper;
 import com.MVC.bankaccount.application.usecase.AccountGetCaseImpl;
 import com.MVC.bankaccount.application.usecase.ClientCreateCaseImpl;
 import com.MVC.bankaccount.domain.exception.GeneralNotFoundException;
@@ -25,24 +26,25 @@ public class AccountService {
     private final AccountGetCaseImpl accountGetCase;
     private final MessageService messageService;
 
+    private final AccountMapper accountMapper;
+
     @Autowired
     public AccountService(JpaAccountRepository jpaAccountRepository, ClientCreateCaseImpl clientUserCase, AccountGetCaseImpl accountGetCase, MessageService messageService) {
         this.jpaAccountRepository = jpaAccountRepository;
         this.clientUserCase = clientUserCase;
         this.accountGetCase = accountGetCase;
         this.messageService = messageService;
+        this.accountMapper = AccountMapper.INSTANCE;
     }
 
     public void save(AccountClientRequest accountClientRequest) {
-        List<AccountEntity> accountNumber = jpaAccountRepository.findByAccountNumber(accountClientRequest.getAccountNumber());
-
-        if (!accountNumber.isEmpty()) {
+        if (!jpaAccountRepository.findByAccountNumber(accountClientRequest.getAccountNumber()).isEmpty()) {
             throw new GeneralNotFoundException(messageService.getMessage("error.account.code.already.exist", accountClientRequest.getAccountNumber()));
         }
 
         ClientEntity client = clientUserCase.getOrCreateClient(accountClientRequest.getClient());
-        AccountEntity accountEntity = new AccountEntity();
-        BeanUtils.copyProperties(accountClientRequest,accountEntity );
+
+        AccountEntity accountEntity = accountMapper.toEntity(accountClientRequest);
         accountEntity.setClient(client);
 
         jpaAccountRepository.save(accountEntity);
