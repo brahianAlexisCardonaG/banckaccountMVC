@@ -35,9 +35,12 @@ Si necesitas más detalles, aquí tienes un video explicativo:
 🎥 https://drive.google.com/file/d/1MGZc0mPLhqE7TopfkKhWKVsz4P7XiKH7/view?usp=sharing
 
 Tener en cuenta:
+
 Existen 3 ramas: 
-master: se utiliza BeanUtils.copyProperties para mappear entidades, 
-change-beanutil-by-mapper: se actualizó para utilizar los Mappers de mapstruct, 
-created-test-unitaries-backaccount esta version tambien utiliza mapStruct, pero se agregaron pruebas unitarias
+
+master: se utiliza BeanUtils.copyProperties para mappear entidades. 
+change-beanutil-by-mapper: se actualizó para utilizar los Mappers de mapstruct.
+created-test-unitaries-backaccount esta version tambien utiliza mapStruct, pero se agregaron pruebas unitarias.
+
 El archivo JSON de Postman está incluido en el proyecto.
 También cuenta con documentación de la API a través de Swagger.(http://localhost:3071/swagger-ui/index.html#/)
