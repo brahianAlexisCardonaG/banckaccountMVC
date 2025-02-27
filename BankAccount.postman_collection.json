@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "36f00e04-425a-4f9e-ac45-48237432e4b1",
+		"name": "Bank Account",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22780610"
+	},
+	"item": [
+		{
+			"name": "getByAccountNumber",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3071/api/v1/account/list?accountNumber=12346789",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3071",
+					"path": [
+						"api",
+						"v1",
+						"account",
+						"list"
+					],
+					"query": [
+						{
+							"key": "accountNumber",
+							"value": "12346789"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getByAccountById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3071/api/v1/account/list?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3071",
+					"path": [
+						"api",
+						"v1",
+						"account",
+						"list"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllAccounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3071/api/v1/account/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3071",
+					"path": [
+						"api",
+						"v1",
+						"account",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saveTransacction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"transactionType\": \"DEPOSIT\",\r\n  \"amount\": 1000,\r\n  \"transactionDate\": \"2025-02-27\",\r\n  \"description\": \"pago internet\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3071/api/v1/transaction/create-transaction?identificationNumber=123456789&accountNumber=12346789",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3071",
+					"path": [
+						"api",
+						"v1",
+						"transaction",
+						"create-transaction"
+					],
+					"query": [
+						{
+							"key": "identificationNumber",
+							"value": "123456789"
+						},
+						{
+							"key": "accountNumber",
+							"value": "12346789"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saveAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"accountNumber\": \"123146789\",\r\n    \"accountType\": \"SAVINGS\",\r\n    \"balance\": 19000,\r\n    \"createdAt\": \"2025-02-27\",\r\n    \"client\": {\r\n      \"name\": \"brahian\",\r\n      \"email\": \"brahian@gmail.com\",\r\n      \"phone\": \"123456789\",\r\n      \"identificationNumber\": \"1234561789\",\r\n      \"createdAt\": \"2025-02-27\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3071/api/v1/account/create-account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3071",
+					"path": [
+						"api",
+						"v1",
+						"account",
+						"create-account"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
