@@ -33,3 +33,7 @@ mvn spring-boot:run
 Guía en video
 Si necesitas más detalles, aquí tienes un video explicativo:
 🎥 https://drive.google.com/file/d/1MGZc0mPLhqE7TopfkKhWKVsz4P7XiKH7/view?usp=sharing
+
+Tener en cuenta:
+El archivo JSON de Postman está incluido en el proyecto.
+También cuenta con documentación de la API a través de Swagger.(http://localhost:3071/swagger-ui/index.html#/)
