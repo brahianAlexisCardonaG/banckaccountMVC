@@ -155,6 +155,64 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "signUp User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"diana\",\r\n    \"password\":\"1234\",\r\n    \"roleRequest\":{\r\n        \"roleListName\":[\r\n            \"ADMIN\"\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3071/auth/sign-up",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3071",
+					"path": [
+						"auth",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logIn User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"diana\",\r\n    \"password\":\"1234\",\r\n    \"roleRequest\":{\r\n        \"roleListName\":[\r\n            \"ADMIN\"\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3071/auth/log-in",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3071",
+					"path": [
+						"auth",
+						"log-in"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
